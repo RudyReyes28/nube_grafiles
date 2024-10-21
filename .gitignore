@@ -1,0 +1,8 @@
+# Ignorar el directorio vendor (dependencias de Composer)
+/vendor/
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos de configuración específicos
+.env

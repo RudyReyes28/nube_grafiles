@@ -14,7 +14,13 @@ if ($usuarioE && password_verify($contrasenia, $usuarioE['password'])) {
 
         case 'empleado':
             $_SESSION['usuario'] = $usuarioE;
-            header("Location: ../../vista/empleado/vistaEmpleado.php");
+            $directorioRaiz = 'raiz'; // O el ID del directorio raíz específico
+
+            // Almacenar el directorio en la sesión para facilitar su uso en la vista
+            $_SESSION['directorio_actual'] = $directorioRaiz;
+
+            // Redirigir a la vista del empleado, pasando el directorio raíz
+            header("Location: ../../vista/empleado/vistaEmpleado.php?directorio=$directorioRaiz");
             exit;
         case 'administrador':
             $_SESSION['usuario'] = $usuarioE;
