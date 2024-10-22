@@ -6,7 +6,7 @@
 
 
      class ObtenerDirectorio{
-        public static function obtenerDirectorio($nombreDirectorio, $idUsuarioPropietario)
+        public static function obtenerDirectorioRaiz($nombreDirectorio, $idUsuarioPropietario)
         {
             //$id = new MongoDB\BSON\($idUsuarioPropietario);
             $coleccion = Conexion::obtenerColeccion('directorios'); // Obtiene la colección 'empleados'
@@ -14,6 +14,20 @@
             $directorio = $coleccion->findOne([
                 'nombre' => $nombreDirectorio,
                 'usuario_propietario' => $idUsuarioPropietario
+            ]);
+            return $directorio; // Retorna el usuario
+        }
+
+
+        public static function obtenerDirectorioHijo($nombreDirectorio, $idUsuarioPropietario, $idDirectorioPadre)
+        {
+            //$id = new MongoDB\BSON\($idUsuarioPropietario);
+            $coleccion = Conexion::obtenerColeccion('directorios'); // Obtiene la colección 'empleados'
+
+            $directorio = $coleccion->findOne([
+                'nombre' => $nombreDirectorio,
+                'usuario_propietario' => $idUsuarioPropietario,
+                'carpeta_padre' =>new MongoDB\BSON\ObjectId( $idDirectorioPadre)
             ]);
             return $directorio; // Retorna el usuario
         }

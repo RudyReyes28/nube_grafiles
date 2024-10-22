@@ -6,13 +6,25 @@ $usuarioEmpleado = $_SESSION['usuario'];
 $nombreUsuario = $usuarioEmpleado['nombre_usuario'];
 $usuario = $usuarioEmpleado['usuario'];
 $idUsuario = $usuarioEmpleado['_id'];
+$idDirectorioPadre = $_SESSION['id_directorio_padre'];
 
 
 $directorioActual = isset($_GET['directorio']) ? $_GET['directorio'] : $_SESSION['directorio_actual'];
-$directorio = ObtenerDirectorio::obtenerDirectorio($directorioActual, $idUsuario );
+$_SESSION['directorio_actual'] = $directorioActual;
+$directorio= null;
+if($directorioActual == 'raiz'){
+    $directorio = ObtenerDirectorio::obtenerDirectorioRaiz($directorioActual, $idUsuario );
+   
+}else{
+    $directorio = ObtenerDirectorio::obtenerDirectorioHijo($directorioActual, $idUsuario, $idDirectorioPadre);
+}
+
 if($directorio){
     $directorio = $directorio->getArrayCopy();
     $idDirectorioActual = $directorio['_id'];
+    $_SESSION['id_directorio_padre'] = $idDirectorioActual;
+    //echo "Directorio actual: " . $directorio['nombre'];
+    //echo "idDirectorioActual: " . $idDirectorioActual;
 }else{
     echo "No se encontró el directorio";
 }
@@ -48,7 +60,7 @@ if($directorio){
                                 <h5 class="modal-title" id="crearArchivoModalLabel">Crear Nuevo Archivo</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="crearArchivo.php" method="POST">
+                            <form action="../../controlador/empleado/nuevoArchivo.php" method="POST">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nombreArchivo" class="form-label">Nombre del Archivo</label>
@@ -65,7 +77,7 @@ if($directorio){
                                         <label for="contenidoArchivo" class="form-label">Contenido del Archivo</label>
                                         <textarea class="form-control" id="contenidoArchivo" name="contenidoArchivo" rows="5" required></textarea>
                                     </div>
-                                    <input type="hidden" name="directorioPadre" value="<?php echo $idDirectorioActual; ?>">
+                                    <input type="hidden" name="idDirectorioPadre" value="<?php echo $idDirectorioActual; ?>">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
