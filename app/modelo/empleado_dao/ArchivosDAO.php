@@ -1,6 +1,6 @@
 <?php
-    require '../../../vendor/autoload.php'; // Incluye el autoloader de Composer
-    require '../../modelo/conexiondb/Conexion.php'; // Incluye la clase de conexión a la base de datos
+    require_once '../../../vendor/autoload.php'; // Incluye el autoloader de Composer
+    require_once '../../modelo/conexiondb/Conexion.php'; // Incluye la clase de conexión a la base de datos
 
     
     class ArchivosDAO{
@@ -30,6 +30,38 @@
                     return false;
                 }
             }
+        }
+
+        public static function subirImagen($nombreArchivo, $extensionArchivo, $rutaImagen, $directorioPadre, $idUsuario){
+            $collection = Conexion::obtenerColeccion('archivos');
+            
+            
+                // Crear el archivo en MongoDB
+                $nuevoArchivo = [
+                    'nombre' => $nombreArchivo,
+                    'extension' => $extensionArchivo,
+                    'contenido' => $rutaImagen,
+                    'carpeta_padre' =>new MongoDB\BSON\ObjectId($directorioPadre),
+                    'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuario),
+                    'fecha_creacion' => new MongoDB\BSON\UTCDateTime()
+                ];
+        
+                // Insertar el archivo en la colección
+                $insertResult = $collection->insertOne($nuevoArchivo);
+        
+                if ($insertResult->getInsertedCount() > 0) {
+                    // Redirigir a la vista de archivos/directorios
+                    return true;
+                } else {
+                    return false;
+                }
+            
+        }
+
+        public static function obtenerArchivos($idDirectorio){
+            $collection = Conexion::obtenerColeccion('archivos');
+            $archivos = $collection->find(['carpeta_padre' => new MongoDB\BSON\ObjectId($idDirectorio)]);
+            return $archivos;
         }
     }
 

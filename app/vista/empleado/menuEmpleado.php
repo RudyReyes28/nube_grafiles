@@ -14,10 +14,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Nuevo Directorio</span> </a>
+                        <a href="#" class="nav-link px-0" data-bs-toggle="modal" data-bs-target="#crearDirectorioModal">
+                            <span class="d-none d-sm-inline">Nuevo Directorio</span>
+                        </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Subir Imagen</span> </a>
+                        <a href="#" class="nav-link px-0" data-bs-toggle="modal" data-bs-target="#subirImagenModal">
+                            <span class="d-none d-sm-inline">Subir Imagen</span>
+                        </a>
                     </li>
                 </ul>
             </li>
