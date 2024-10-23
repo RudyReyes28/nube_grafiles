@@ -19,6 +19,7 @@ if ($usuarioE && password_verify($contrasenia, $usuarioE['password'])) {
             // Almacenar el directorio en la sesión para facilitar su uso en la vista
             $_SESSION['directorio_actual'] = $directorioRaiz;
             $_SESSION['id_directorio_padre'] = null;
+            $_SESSION['id_directorio_actual'] = null;
 
             // Redirigir a la vista del empleado, pasando el directorio raíz
             header("Location: ../../vista/empleado/vistaEmpleado.php?directorio=$directorioRaiz");

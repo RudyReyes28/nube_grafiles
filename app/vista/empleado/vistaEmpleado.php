@@ -8,18 +8,23 @@ $nombreUsuario = $usuarioEmpleado['nombre_usuario'];
 $usuario = $usuarioEmpleado['usuario'];
 $idUsuario = $usuarioEmpleado['_id'];
 $idDirectorioPadre = $_SESSION['id_directorio_padre'];
-
+$idDirectorioActual = $_SESSION['id_directorio_actual'];
 
 $directorioActual = isset($_GET['directorio']) ? $_GET['directorio'] : $_SESSION['directorio_actual'];
 $_SESSION['directorio_actual'] = $directorioActual;
 $directorio = null;
 if ($directorioActual == 'raiz') {
     $directorio = ObtenerDirectorio::obtenerDirectorioRaiz($directorioActual, $idUsuario);
-} else {
-    $directorio = ObtenerDirectorio::obtenerDirectorioHijo($directorioActual, $idUsuario, $idDirectorioPadre);
+    $directorio = $directorio->getArrayCopy();
+    $idDirectorioActual = $directorio['_id'];
 }
+// else {
+//    echo "idDirectorioPadre: " . $idDirectorioPadre;
+//    
+//    $directorio = ObtenerDirectorio::obtenerDirectorioHijo($directorioActual, $idUsuario, $idDirectorioPadre);
+//}
 
-if ($directorio) {
+/*if ($directorio) {
     $directorio = $directorio->getArrayCopy();
     $idDirectorioActual = $directorio['_id'];
     $_SESSION['id_directorio_padre'] = $idDirectorioActual;
@@ -27,7 +32,7 @@ if ($directorio) {
     //echo "idDirectorioActual: " . $idDirectorioActual;
 } else {
     echo "No se encontró el directorio";
-}
+}*/
 
 //aqui debemos obtener los archivos
 $archivosEmpleado = ArchivosDAO::obtenerArchivos($idDirectorioActual);
@@ -59,8 +64,14 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
         <div class="row flex-nowrap">
             <?php include 'menuEmpleado.php'; ?>
             <div class="col py-3">
-                Content area...
-                <div class="row">
+                
+                <div style="display: flex; align-items: center;">
+                    <i class="fas fa-folder fa-2x"></i>
+                    <h5 style="margin-left: 10px;"><?php echo $directorioActual; ?></h5>
+                </div>
+                
+                
+                <div class="row mt-2">
                     <!-- Mostrar Directorios -->
                     <?php foreach ($directoriosEmpleado as $directorioA) { ?>
                         <div class="col-sm-4 mb-4">
@@ -69,12 +80,18 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                                     <!-- Icono de carpeta -->
                                     <i class="fas fa-folder fa-5x"></i>
                                     <h5 class="card-title mt-3"><?php echo $directorioA['nombre']; ?></h5>
-                                    <a href="#" class="btn btn-primary">Entrar</a>
-                                    <div class="dropdown mt-3">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <form action="../../controlador/empleado/cambiarDirectorio.php" method="POST">
+                                        <!-- Campos ocultos para enviar parámetros -->
+                                        <input type="hidden" name="idDirectorio" value="<?php echo $directorioA['_id']; ?>">
+                                        <input type="hidden" name="nombreDirectorio" value="<?php echo $directorioA['nombre']; ?>">
+                                    
+                                        <!-- Botón de enviar -->
+                                        <button type="submit" class="btn btn-primary">Entrar</button>
+                                    </form>
+                                    <div class="dropdown mt-3">             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?php echo $archivo['_id']; ?>">
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?php echo $directorioA['_id']; ?>">
                                             <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="crear-copia">Crear Copia</a></li>
                                             <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="mover">Mover</a></li>
                                             <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="eliminar">Eliminar</a></li>
