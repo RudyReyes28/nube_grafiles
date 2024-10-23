@@ -17,7 +17,9 @@
                     'contenido' => $contenidoArchivo,
                     'carpeta_padre' =>new MongoDB\BSON\ObjectId($directorioPadre),
                     'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuario),
-                    'fecha_creacion' => new MongoDB\BSON\UTCDateTime()
+                    'fecha_creacion' => new MongoDB\BSON\UTCDateTime(),
+                    'estado' => "activo",
+                    'fecha_eliminacion' => null
                 ];
         
                 // Insertar el archivo en la colección
@@ -43,7 +45,9 @@
                     'contenido' => $rutaImagen,
                     'carpeta_padre' =>new MongoDB\BSON\ObjectId($directorioPadre),
                     'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuario),
-                    'fecha_creacion' => new MongoDB\BSON\UTCDateTime()
+                    'fecha_creacion' => new MongoDB\BSON\UTCDateTime(),
+                    'estado' => "activo",
+                    'fecha_eliminacion' => null
                 ];
         
                 // Insertar el archivo en la colección
