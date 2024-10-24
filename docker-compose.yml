@@ -8,11 +8,11 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      - MONGO_HOST=mongo-server  # Asegúrate de que este nombre coincida
+      - MONGO_HOST=mongo-server  
     networks:
-      - mongodb_network  # Conéctalo a la red existente
+      - mongodb_network  
 
 
 networks:
   mongodb_network:
-    external: true  # Indica que la red ya existe
+    external: true 
