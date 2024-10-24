@@ -16,6 +16,10 @@ class Conexion
     {
         if (self::$cliente === null) {
             self::$cliente = new MongoDB\Client("mongodb://localhost:27017");
+            //self::$cliente = new MongoDB\Client("mongodb://mongo:27017");
+            //$mongoHost = getenv('MONGO_HOST') ?: 'localhost';
+            //self::$cliente = new MongoDB\Client("mongodb://$mongoHost:27017");
+            //self::$cliente = new MongoDB\Client("mongodb://mongo-server:27017");
         }
 
         return self::$cliente;

@@ -64,13 +64,13 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
         <div class="row flex-nowrap">
             <?php include 'menuEmpleado.php'; ?>
             <div class="col py-3">
-                
+
                 <div style="display: flex; align-items: center;">
                     <i class="fas fa-folder fa-2x"></i>
                     <h5 style="margin-left: 10px;"><?php echo $directorioActual; ?></h5>
                 </div>
-                
-                
+
+
                 <div class="row mt-2">
                     <!-- Mostrar Directorios -->
                     <?php foreach ($directoriosEmpleado as $directorioA) { ?>
@@ -83,25 +83,35 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                                     <form action="../../controlador/empleado/cambiarDirectorio.php" method="POST">
                                         <!-- Campos ocultos para enviar parámetros -->
                                         <input type="hidden" name="idDirectorio" value="<?php echo $directorioA['_id']; ?>">
-                                        <input type="hidden" name="nombreDirectorio" value="<?php echo $directorioA['nombre']; ?>">
-                                    
+                                        <input type="hidden" name="nombreDirectorio"
+                                            value="<?php echo $directorioA['nombre']; ?>">
+
                                         <!-- Botón de enviar -->
                                         <button type="submit" class="btn btn-primary">Entrar</button>
                                     </form>
-                                    <div class="dropdown mt-3">             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="dropdown mt-3"> <button class="btn btn-secondary dropdown-toggle"
+                                            type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?php echo $directorioA['_id']; ?>">
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="crear-copia">Crear Copia</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="mover">Mover</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $directorioA['_id']; ?>" data-action="eliminar">Eliminar</a></li>
+                                        <ul class="dropdown-menu"
+                                            aria-labelledby="dropdownMenuButton<?php echo $directorioA['_id']; ?>">
+                                            <li><a class="dropdown-item" href="#"
+                                                    data-id="<?php echo $directorioA['_id']; ?>"
+                                                    data-action="crear-copia">Crear Copia</a></li>
+                                            <li><a class="dropdown-item" href="#"
+                                                    data-id="<?php echo $directorioA['_id']; ?>"
+                                                    data-action="mover">Mover</a></li>
+                                            <li><a class="dropdown-item" href="#"
+                                                    data-id="<?php echo $directorioA['_id']; ?>"
+                                                    data-action="eliminar">Eliminar</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                     <?php } ?>
 
                     <!-- Mostrar Archivos -->
@@ -136,15 +146,28 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                                     </button>
                                     <!-- Dropdown de opciones -->
                                     <div class="dropdown mt-3">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton<?php echo $archivo['_id']; ?>" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<?php echo $archivo['_id']; ?>">
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="editar">Editar Archivo</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="crear-copia">Crear Copia</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="mover">Mover</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="eliminar">Eliminar</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="compartir">Compartir</a></li>
+                                        <ul class="dropdown-menu"
+                                            aria-labelledby="dropdownMenuButton<?php echo $archivo['_id']; ?>">
+                                            <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#editarArchivoModal" data-id="<?php echo $archivo['_id']; ?>"
+                                                data-nombre="<?php echo $archivo['nombre']; ?>"
+                                                data-extension="<?php echo $archivo['extension']; ?>"
+                                                data-contenido="<?php echo htmlspecialchars($archivo['contenido']); ?>">
+                                                Editar Archivo
+                                            </button></li>
+                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
+                                                    data-action="crear-copia">Crear Copia</a></li>
+                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
+                                                    data-action="mover">Mover</a></li>
+                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
+                                                    data-action="eliminar">Eliminar</a></li>
+                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
+                                                    data-action="compartir">Compartir</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -156,8 +179,38 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
 
                 <?php include 'modalEmpleado.php'; ?>
 
-                
-                
+                <!-- Modal para Editar Archivo -->
+                <div class="modal fade" id="editarArchivoModal" tabindex="-1" aria-labelledby="editarArchivoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarArchivoModalLabel">Editar Archivo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editarArchivoForm" action="../../controlador/empleado/editarArchivos.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="archivoId" name="archivoId">
+                    <div class="mb-3">
+                        <label for="nombreArchivo" class="form-label">Nombre del Archivo</label>
+                        <input type="text" class="form-control" id="nombreArchivo" name="nombreArchivo" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contenidoArchivo" class="form-label">Contenido</label>
+                        <textarea class="form-control" id="contenidoArchivo" name="contenidoArchivo" rows="5"></textarea>
+                    </div>
+                    <div class="mb-3" id="reemplazarImagenDiv" style="display:none;">
+                        <label for="reemplazarImagen" class="form-label">Reemplazar Imagen</label>
+                        <input type="file" class="form-control" id="reemplazarImagen" name="reemplazarImagen" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
             </div>
@@ -184,14 +237,53 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                 // Mostrar imagen
                 modalBodyContent.innerHTML = '<img src="../../controlador/empleado/' + contenido + '" class="img-fluid" alt="' + nombre + '">';
             } else if (extension === '.txt' || extension === '.html') {
-            // Mostrar contenido de texto o HTML
-            
+                // Mostrar contenido de texto o HTML
+
                 modalBodyContent.innerHTML = '<pre>' + contenido + '</pre>';
             } else {
                 // Otras extensiones de archivo
                 modalBodyContent.innerHTML = '<p>Tipo de archivo no soportado para vista previa.</p>';
             }
         });
+
+        var editarArchivoModal = document.getElementById('editarArchivoModal');
+editarArchivoModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget; // Botón que abrió el modal
+    var nombre = button.getAttribute('data-nombre');
+    var extension = button.getAttribute('data-extension');
+    var contenido = button.getAttribute('data-contenido');
+    var archivoId = button.getAttribute('data-id'); // Asegúrate de incluir esto en el botón
+
+    // Cambiar el título del modal
+    var modalTitle = editarArchivoModal.querySelector('.modal-title');
+    modalTitle.textContent = 'Editar Archivo: ' + nombre;
+
+    // Limpiar los valores anteriores
+    var archivoIdInput = editarArchivoModal.querySelector('#archivoId');
+    var nombreArchivoInput = editarArchivoModal.querySelector('#nombreArchivo');
+    var contenidoArchivoTextarea = editarArchivoModal.querySelector('#contenidoArchivo');
+    var reemplazarImagenDiv = editarArchivoModal.querySelector('#reemplazarImagenDiv');
+
+    // Asignar los valores a los inputs
+    archivoIdInput.value = archivoId;
+    nombreArchivoInput.value = nombre; // Establece el nombre del archivo
+    contenidoArchivoTextarea.value = contenido; // Establece el contenido del archivo
+
+    // Configura la visibilidad de los elementos según la extensión
+    if (extension.includes('image')) {
+        reemplazarImagenDiv.style.display = 'block'; // Mostrar input para reemplazar imagen
+        contenidoArchivoTextarea.style.display = 'none'; // Ocultar textarea
+    } else if (extension === '.txt' || extension === '.html') {
+        reemplazarImagenDiv.style.display = 'none'; // Ocultar input de imagen
+        contenidoArchivoTextarea.style.display = 'block'; // Mostrar textarea
+    } else {
+        reemplazarImagenDiv.style.display = 'none'; // Ocultar input de imagen
+        contenidoArchivoTextarea.style.display = 'none'; // Ocultar textarea
+        alert("Tipo de archivo no soportado para edición.");
+    }
+});
+
+        
     </script>
 
 

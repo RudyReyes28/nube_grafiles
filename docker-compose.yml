@@ -1,0 +1,18 @@
+
+services:
+  web:
+    build: .
+    container_name: php_nube_grafiles
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - MONGO_HOST=mongo-server  # Asegúrate de que este nombre coincida
+    networks:
+      - mongodb_network  # Conéctalo a la red existente
+
+
+networks:
+  mongodb_network:
+    external: true  # Indica que la red ya existe
