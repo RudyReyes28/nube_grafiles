@@ -5,11 +5,11 @@ require '../../modelo/empleado_dao/ObtenerUsuarios.php'; // Incluye la clase par
 
     $usuarioE = ObtenerUsuarios::obtenerUsuario($usuario)->getArrayCopy(); // Obtiene el usuario con el nombre de usuario especificado
 
-    
+    session_start();
 
     
 if ($usuarioE && password_verify($contrasenia, $usuarioE['password'])) {
-    session_start();
+    
     switch ($usuarioE['rol']) {
 
         case 'empleado':
@@ -35,6 +35,6 @@ if ($usuarioE && password_verify($contrasenia, $usuarioE['password'])) {
 } else {
     
      $error = "Usuario o contraseña incorrectos.";
-    echo $error;
+    //echo $error;
 }
 ?>

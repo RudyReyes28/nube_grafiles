@@ -13,7 +13,7 @@
 
             $directorio = $coleccion->findOne([
                 'nombre' => $nombreDirectorio,
-                'usuario_propietario' => $idUsuarioPropietario
+                'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuarioPropietario)
             ]);
             return $directorio; // Retorna el usuario
         }

@@ -8,11 +8,22 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      - MONGO_HOST=mongo-server  
+      - MONGO_HOST=mongo-nube  
     networks:
       - mongodb_network  
 
+  mongo-server:
+    image: mongo:latest
+    container_name: mongo-nube
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mongodb_network
+
+volumes:
+  mongodb_data:
 
 networks:
   mongodb_network:
-    external: true 

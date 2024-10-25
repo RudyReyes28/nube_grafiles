@@ -9,12 +9,13 @@ $usuario = $usuarioEmpleado['usuario'];
 $idUsuario = $usuarioEmpleado['_id'];
 $idDirectorioPadre = $_SESSION['id_directorio_padre'];
 $idDirectorioActual = $_SESSION['id_directorio_actual'];
-
+//echo $idUsuario;
 $directorioActual = isset($_GET['directorio']) ? $_GET['directorio'] : $_SESSION['directorio_actual'];
 $_SESSION['directorio_actual'] = $directorioActual;
 $directorio = null;
 if ($directorioActual == 'raiz') {
     $directorio = ObtenerDirectorio::obtenerDirectorioRaiz($directorioActual, $idUsuario);
+    //print_r($directorio);
     $directorio = $directorio->getArrayCopy();
     $idDirectorioActual = $directorio['_id'];
 }
