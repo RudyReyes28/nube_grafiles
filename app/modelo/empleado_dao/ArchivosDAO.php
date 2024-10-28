@@ -67,6 +67,19 @@
             $archivos = $collection->find(['carpeta_padre' => new MongoDB\BSON\ObjectId($idDirectorio)]);
             return $archivos;
         }
+
+        public static function moverArchivo($idArchivo, $idDirectorio){
+            $collection = Conexion::obtenerColeccion('archivos');
+            $updateResult = $collection->updateOne(
+                ['_id' => new MongoDB\BSON\ObjectId($idArchivo)],
+                ['$set' => ['carpeta_padre' => new MongoDB\BSON\ObjectId($idDirectorio)]]
+            );
+            if ($updateResult->getModifiedCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
 

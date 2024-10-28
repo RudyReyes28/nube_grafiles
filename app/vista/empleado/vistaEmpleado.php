@@ -40,6 +40,7 @@ $archivosEmpleado = ArchivosDAO::obtenerArchivos($idDirectorioActual);
 //aqui obtemos los directorios
 $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioActual);
 
+$todosLosDirectoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosUsuario($idUsuario);
 //print_r($idDirectorioActual);
 //print_r($directoriosEmpleado);
 //print_r($archivosEmpleado);
@@ -174,12 +175,13 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                                                 </button>
 
                                             </li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
-                                                    data-action="mover">Mover</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
-                                                    data-action="eliminar">Eliminar</a></li>
-                                            <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"
-                                                    data-action="compartir">Compartir</a></li>
+                                            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#moverArchivoModal"
+                                                            data-id="<?php echo $archivo['_id']; ?>" 
+                                                            data-nombre="<?php echo $archivo['nombre']; ?>"">
+                                                            Mover Archivo
+                                                        </button></li>
+                                                <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="eliminar">Eliminar</a></li>
+                                                <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"          data-action="compartir">Compartir</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -191,16 +193,6 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
 
                 <?php include 'modalEmpleado.php'; ?>
 
-
-<!-- Formulario oculto para crear copia -->
-<form id="createCopyForm" action="../../controlador/empleado/crearCopia.php" method="POST" style="display: none;">
-    <input type="hidden" name="archivoId" id="archivoIdCopia">
-    <input type="hidden" name="nombreArchivo" id="nombreArchivoCopia">
-    <input type="hidden" name="contenidoArchivo" id="contenidoArchivoCopia">
-    <input type="hidden" name="extensionArchivo" id="extensionArchivoCopia">
-    <input type="hidden" name="idDirectorioPadre" id="idDirectorioPadre">
-    <input type="hidden" name="idUsuario" id="idUsuario">
-</form>
 
 
 
@@ -274,6 +266,21 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
                 alert("Tipo de archivo no soportado para edición.");
             }
         });
+        var moverArchivoModal = document.getElementById('moverArchivoModal');
+moverArchivoModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var archivoId = button.getAttribute('data-id');
+    var nombreArchivo = button.getAttribute('data-nombre');
+    console.log('Archivo ID: ' + archivoId);
+    console.log('Nombre Archivo: ' + nombreArchivo);
+    // Asigna valores al formulario en el modal
+    document.getElementById('archivoIdMov').value = archivoId;
+    document.getElementById('nombreArchivoMov').value = nombreArchivo;
+
+     // Verificación de los valores asignados
+    console.log('Archivo ID (en el input):', document.getElementById('archivoIdMov').value);
+    console.log('Nombre Archivo (en el input):', document.getElementById('nombreArchivoMov').value);
+});
 
         function submitCreateCopyForm(element) {
     // Obtener atributos del archivo
@@ -294,7 +301,10 @@ $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioA
 
     // Enviar el formulario
     document.getElementById('createCopyForm').submit();
+
 }
+
+
     </script>
 
 

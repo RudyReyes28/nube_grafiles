@@ -62,5 +62,15 @@
                 return false;
             }
         }
+
+        public static function obtenerDirectoriosUsuario($idUsuarioPropietario)
+        {
+            $coleccion = Conexion::obtenerColeccion('directorios'); // Obtiene la colección 'empleados'
+
+            $directorios = $coleccion->find([
+                'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuarioPropietario)
+            ]);
+            return $directorios; // Retorna el usuario
+        }
      }
 ?>

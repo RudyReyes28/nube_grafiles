@@ -144,3 +144,46 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para Mover Archivo -->
+<div class="modal fade" id="moverArchivoModal" tabindex="-1" aria-labelledby="moverArchivoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moverArchivoModalLabel">Mover Archivo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="moverArchivoForm" action="../../controlador/empleado/moverArchivo.php" method="POST">
+                    <input type="hidden" id="archivoIdMov" name="archivoIdMov">
+                    <div class="mb-3">
+                        <label for="nombreArchivoMov" class="form-label">Archivo:</label>
+                        <input type="text" class="form-control" id="nombreArchivoMov" name="nombreArchivoMov" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="directorioDestino" class="form-label">Selecciona el directorio de destino:</label>
+                        <select class="form-select" id="directorioDestino" name="directorioDestino">
+                            <?php
+                                foreach ($todosLosDirectoriosEmpleado as $directorio) {
+                                    echo '<option value="' . $directorio['_id'] . '">' . $directorio['nombre'] . '</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Mover Archivo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario oculto para crear copia -->
+<form id="createCopyForm" action="../../controlador/empleado/crearCopia.php" method="POST" style="display: none;">
+    <input type="hidden" name="archivoId" id="archivoIdCopia">
+    <input type="hidden" name="nombreArchivo" id="nombreArchivoCopia">
+    <input type="hidden" name="contenidoArchivo" id="contenidoArchivoCopia">
+    <input type="hidden" name="extensionArchivo" id="extensionArchivoCopia">
+    <input type="hidden" name="idDirectorioPadre" id="idDirectorioPadre">
+    <input type="hidden" name="idUsuario" id="idUsuario">
+</form>
+
