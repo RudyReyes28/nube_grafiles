@@ -41,6 +41,8 @@ $archivosEmpleado = ArchivosDAO::obtenerArchivos($idDirectorioActual);
 $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioActual);
 
 $todosLosDirectoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosUsuario($idUsuario);
+
+$todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
 //print_r($idDirectorioActual);
 //print_r($directoriosEmpleado);
 //print_r($archivosEmpleado);
@@ -180,8 +182,18 @@ $todosLosDirectoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosUsuario($idU
                                                             data-nombre="<?php echo $archivo['nombre']; ?>"">
                                                             Mover Archivo
                                                         </button></li>
-                                                <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>" data-action="eliminar">Eliminar</a></li>
-                                                <li><a class="dropdown-item" href="#" data-id="<?php echo $archivo['_id']; ?>"          data-action="compartir">Compartir</a></li>
+                                                <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#eliminarArchivoModal"
+                                                            data-id="<?php echo $archivo['_id']; ?>" 
+                                                            data-nombre="<?php echo $archivo['nombre']; ?>"">
+                                                            Eliminar Archivo
+                                                        </button></li>
+                                                <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#compartirArchivoModal"
+                                                    data-nombre="<?php echo $archivo['nombre']; ?>"
+                                                    data-extension="<?php echo $archivo['extension']; ?>"
+                                                    data-idUsuario = "<?php echo $archivo['usuario_propietario']; ?>"	
+                                                    data-contenido="<?php echo htmlspecialchars($archivo['contenido']); ?>">
+                                                    Compartir Archivo
+                                                </button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -271,15 +283,40 @@ moverArchivoModal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var archivoId = button.getAttribute('data-id');
     var nombreArchivo = button.getAttribute('data-nombre');
-    console.log('Archivo ID: ' + archivoId);
-    console.log('Nombre Archivo: ' + nombreArchivo);
     // Asigna valores al formulario en el modal
     document.getElementById('archivoIdMov').value = archivoId;
     document.getElementById('nombreArchivoMov').value = nombreArchivo;
 
-     // Verificación de los valores asignados
-    console.log('Archivo ID (en el input):', document.getElementById('archivoIdMov').value);
-    console.log('Nombre Archivo (en el input):', document.getElementById('nombreArchivoMov').value);
+});
+
+var eliminarArchivoModal = document.getElementById('eliminarArchivoModal');
+eliminarArchivoModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var archivoId = button.getAttribute('data-id');
+    var nombreArchivo = button.getAttribute('data-nombre');
+    // Asigna valores al formulario en el modal
+    document.getElementById('archivoIdElim').value = archivoId;
+    document.getElementById('nombreArchivoElim').value = nombreArchivo;
+
+});
+
+var compartirArchivoModal = document.getElementById('compartirArchivoModal');
+compartirArchivoModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var nombreArchivo = button.getAttribute('data-nombre');
+    var contenidoArchivo = button.getAttribute('data-contenido');
+    var extensionArchivo = button.getAttribute('data-extension');
+    var idUsuario = button.getAttribute('data-idUsuario');
+    // Asigna valores al formulario en el modal
+    console.log('contenido: ' + contenidoArchivo);
+    console.log('extension: ' + extensionArchivo);
+    console.log('idUsuario: ' + idUsuario);
+    console.log('nombreArchivo: ' + nombreArchivo);
+    document.getElementById('nombreArchivoComp').value = nombreArchivo;
+    document.getElementById('contenidoArchivoComp').value = contenidoArchivo;
+    document.getElementById('extensionArchivoComp').value = extensionArchivo;
+    document.getElementById('idUsuarioComp').value = idUsuario;
+
 });
 
         function submitCreateCopyForm(element) {

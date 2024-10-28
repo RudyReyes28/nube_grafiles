@@ -28,6 +28,7 @@
             return $usuariosArray; // Retorna el arreglo de usuarios
         }
 
+        
         public static function obtenerUsuario($usuario)
         {
             $coleccion = Conexion::obtenerColeccion('usuarios'); // Obtiene la colección 'empleados'

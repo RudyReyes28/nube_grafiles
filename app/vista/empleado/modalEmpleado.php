@@ -187,3 +187,61 @@
     <input type="hidden" name="idUsuario" id="idUsuario">
 </form>
 
+<!-- Modal para Eliminar Archivo -->
+<div class="modal fade" id="eliminarArchivoModal" tabindex="-1" aria-labelledby="eliminarArchivoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarArchivoModalLabel">Eliminar Archivo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eliminarArchivoForm" action="../../controlador/empleado/eliminarArchivo.php" method="POST">
+                    <input type="hidden" id="archivoIdElim" name="archivoIdElim">
+                    <div class="mb-3">
+                        <label for="nombreArchivoElim" class="form-label">Archivo:</label>
+                        <input type="text" class="form-control" id="nombreArchivoElim" name="nombreArchivoElim" readonly>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Eliminar Archivo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para Compartir Archivo -->
+<div class="modal fade" id="compartirArchivoModal" tabindex="-1" aria-labelledby="compartirArchivoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="compartirArchivoModalLabel">Compartir Archivo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="compartirArchivoForm" action="../../controlador/empleado/compartirArchivo.php" method="POST">
+                    <input type="hidden" id="contenidoArchivoComp" name="contenidoArchivoComp">
+                    <input type="hidden" id="extensionArchivoComp" name="extensionArchivoComp">
+                    <input type="hidden" id="idUsuarioComp" name="idUsuarioComp">
+                    
+                    <div class="mb-3">
+                        <label for="nombreArchivoComp" class="form-label">Archivo:</label>
+                        <input type="text" class="form-control" id="nombreArchivoComp" name="nombreArchivoComp" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idUsuarioCompartido" class="form-label">Selecciona el usuario a compartir:</label>
+                        <select class="form-select" id="idUsuarioCompartido" name="idUsuarioCompartido">
+                            <?php
+                                foreach ($todosLosUsuarios as $usuarioC) {
+                                    echo '<option value="' . $usuarioC['_id'] . '">' . $usuarioC['nombre_usuario'] . '</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Compartir Archivo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

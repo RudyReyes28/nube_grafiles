@@ -33,7 +33,7 @@
             </li>
 
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="vistaCompartidoEmpleado.php" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Compartidos Conmigo</span> </a>
             </li>
         </ul>
