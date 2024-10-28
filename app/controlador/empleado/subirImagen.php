@@ -26,7 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $realizado = ArchivosDAO::subirImagen($nombreArchivo, $tipoArchivo, $nombreFinal, $directorioPadre, $idUsuario);
         if ($realizado) {
             // Redirigir a la vista de archivos/directorios
-            header('Location: ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio);
+            $tipoEmpleado = $_SESSION['tipo_empleado'];
+    if($tipoEmpleado == "administrador"){
+        header('Location: ../../vista/administrador/vistaAdministrador.php?directorio='.$nombreDirectorio);
+    }else{
+        header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
+    }
         }else{
             echo "Error al subir la imagen.";
         }

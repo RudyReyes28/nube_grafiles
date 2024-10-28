@@ -148,6 +148,12 @@
             }
         }
 
+        public static function obtenerPapelera(){
+            $collection = Conexion::obtenerColeccion('archivos');
+            $archivos = $collection->find(['estado' => 'inactivo']);
+            return $archivos;
+        }
+
     }
 
 

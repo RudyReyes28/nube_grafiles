@@ -12,7 +12,12 @@
         $realizado = ObtenerDirectorio::crearDirectorio($nombreDirectorioC, $idUsuario, $directorioPadre);
         if ($realizado) {
             // Redirigir a la vista de archivos/directorios
-            header('Location: ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio);
+            $tipoEmpleado = $_SESSION['tipo_empleado'];
+    if($tipoEmpleado == "administrador"){
+        header('Location: ../../vista/administrador/vistaAdministrador.php?directorio='.$nombreDirectorio);
+    }else{
+        header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
+    }
         } else {
             echo "Error al crear el archivo.";
         }

@@ -5,7 +5,7 @@ session_start();
     $tipoEmpleado = $_SESSION['tipo_empleado'];
     $realizado = ArchivosDAO::eliminarArchivoCompartido($idArchivo);
     if($tipoEmpleado == "administrador"){
-        header("Location: ../../vista/administrador/vistaCompartidoAdministradir.php");
+        header("Location: ../../vista/administrador/vistaCompartidoAdministrador.php");
     }else{
         header('Location:  ../../vista/empleado/vistaCompartidoEmpleado.php'); 
     }

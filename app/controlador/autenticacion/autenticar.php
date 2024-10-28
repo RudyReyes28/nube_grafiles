@@ -33,7 +33,7 @@ if ($usuarioE && password_verify($contrasenia, $usuarioE['password'])) {
             $_SESSION['id_directorio_padre'] = null;
             $_SESSION['id_directorio_actual'] = null;
             $_SESSION['tipo_empleado'] = 'administrador';
-            //header("Location: ../../vista/administrador/vistaAdministrador.php");
+            header("Location: ../../vista/administrador/vistaAdministrador.php?directorio=$directorioRaiz");
             exit;
         default:
             $error = "Tipo de usuarioE $usuarioE desconocido.";

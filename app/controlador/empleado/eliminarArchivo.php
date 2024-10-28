@@ -5,7 +5,10 @@
     $nombreDirectorio = $_SESSION['directorio_actual'];
 
     $realizado = ArchivosDAO::eliminarArchivo($idArchivo);
-    header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
-
-
+    $tipoEmpleado = $_SESSION['tipo_empleado'];
+    if($tipoEmpleado == "administrador"){
+        header('Location: ../../vista/administrador/vistaAdministrador.php?directorio='.$nombreDirectorio);
+    }else{
+        header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
+    }
 ?>

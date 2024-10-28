@@ -27,7 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     }
 
-    header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
+    $tipoEmpleado = $_SESSION['tipo_empleado'];
+    if($tipoEmpleado == "administrador"){
+        header('Location: ../../vista/administrador/vistaAdministrador.php?directorio='.$nombreDirectorio);
+    }else{
+        header('Location:  ../../vista/empleado/vistaEmpleado.php?directorio=' . $nombreDirectorio); // Cambia a la página que desees*/
+    }
 }
 
 ?>
