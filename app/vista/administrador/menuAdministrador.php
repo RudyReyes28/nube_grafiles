@@ -41,6 +41,11 @@
                 <a href="vistaPapelera.php" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-trash"></i> <span class="ms-1 d-none d-sm-inline">Papelera</span> </a>
             </li>
+
+            <li>
+                <a href="#" class="nav-link px-0 align-middle" data-bs-toggle="modal" data-bs-target="#nuevoTrabajadorModal">
+                    <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Nuevo Trabajador</span> </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown pb-4">

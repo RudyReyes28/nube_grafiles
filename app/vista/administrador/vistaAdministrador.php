@@ -188,6 +188,7 @@ $todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
 
 
                 <?php include '../empleado/modalEmpleado.php'; ?>
+                <?php include 'modalNuevoTrabajador.php'; ?>
 
             </div>
         </div>
