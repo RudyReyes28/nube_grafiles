@@ -33,7 +33,7 @@ $papelera = ArchivosDAO::obtenerPapelera();
 
                 <div style="display: flex; align-items: center;">
                     <i class="fas fa-folder fa-2x"></i>
-                    <h5 style="margin-left: 10px;">Compartidos Conmigo</h5>
+                    <h5 style="margin-left: 10px;">Papelera</h5>
                 </div>
 
 
