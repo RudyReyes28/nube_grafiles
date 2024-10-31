@@ -25,6 +25,7 @@ $archivosEmpleado = ArchivosDAO::obtenerArchivos($idDirectorioActual);
 $directoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosHijos($idDirectorioActual);
 
 $todosLosDirectoriosEmpleado = ObtenerDirectorio::obtenerDirectoriosUsuario($idUsuario);
+$todosLosDirectoriosMover = ObtenerDirectorio::obtenerDirectoriosUsuario($idUsuario);
 
 $todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
 //print_r($idDirectorioActual);
@@ -78,7 +79,7 @@ $todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
                                         <button type="submit" class="btn btn-primary">Entrar</button>
                                     </form>
                                     <div class="dropdown mt-3"> <button class="btn btn-secondary dropdown-toggle"
-                                            type="button" id="dropdownMenuButton<?php echo $archivo['_id']; ?>"
+                                            type="button" id="dropdownMenuButton<?php echo $directorioA['_id']; ?>"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
@@ -87,12 +88,16 @@ $todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
                                             <li><a class="dropdown-item" href="#"
                                                     data-id="<?php echo $directorioA['_id']; ?>"
                                                     data-action="crear-copia">Crear Copia</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    data-id="<?php echo $directorioA['_id']; ?>"
-                                                    data-action="mover">Mover</a></li>
-                                            <li><a class="dropdown-item" href="#"
-                                                    data-id="<?php echo $directorioA['_id']; ?>"
-                                                    data-action="eliminar">Eliminar</a></li>
+                                                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#moverDirectorioModal"
+                                                            data-id="<?php echo $directorioA['_id']; ?>" 
+                                                            data-nombre="<?php echo $directorioA['nombre']; ?>"">
+                                                            Mover Directorio
+                                                        </button></li>
+                                            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#eliminarDirectorioModal"
+                                                            data-id="<?php echo $directorioA['_id']; ?>" 
+                                                            data-nombre="<?php echo $directorioA['nombre']; ?>"">
+                                                            Eliminar Directorio
+                                                        </button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -188,6 +193,7 @@ $todosLosUsuarios = ArchivosDAO::obtenerRestoUsuarios($idUsuario);
 
 
                 <?php include '../empleado/modalEmpleado.php'; ?>
+                <?php include '../empleado/modalDirectoriosEmpleado.php'; ?>
                 <?php include 'modalNuevoTrabajador.php'; ?>
 
             </div>
@@ -278,6 +284,30 @@ eliminarArchivoModal.addEventListener('show.bs.modal', function (event) {
     // Asigna valores al formulario en el modal
     document.getElementById('archivoIdElim').value = archivoId;
     document.getElementById('nombreArchivoElim').value = nombreArchivo;
+
+});
+
+var eliminarDirectorioModal = document.getElementById('eliminarDirectorioModal');
+eliminarDirectorioModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var directorioIdE = button.getAttribute('data-id');
+    var nombreDirectorioE = button.getAttribute('data-nombre');
+    //console.log('directorioId: ' + directorioIdE);
+    // Asigna valores al formulario en el modal
+    document.getElementById('directorioIdElim').value = directorioIdE;
+    document.getElementById('nombreDirectorioElim').value = nombreDirectorioE;
+
+});
+
+var moverDirectorioModal = document.getElementById('moverDirectorioModal');
+moverDirectorioModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var directorioIdMov = button.getAttribute('data-id');
+    var nombreDirectorioMov = button.getAttribute('data-nombre');
+    //console.log('directorioId: ' + directorioIdE);
+    // Asigna valores al formulario en el modal
+    document.getElementById('directorioIdMov').value = directorioIdMov;
+    document.getElementById('nombreDirectorioMov').value = nombreDirectorioMov;
 
 });
 

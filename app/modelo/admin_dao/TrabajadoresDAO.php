@@ -35,7 +35,7 @@ require_once '../../modelo/conexiondb/Conexion.php'; // Incluye la clase de cone
             
             // Crear el directorio raíz en MongoDB
             $nuevoDirectorio = [
-                'nombre' => 'raíz',
+                'nombre' => 'raiz',
                 'carpeta_padre' => null,
                 'usuario_propietario' => new MongoDB\BSON\ObjectId($idEmpleado),
                 'fecha_creacion' => new MongoDB\BSON\UTCDateTime(),

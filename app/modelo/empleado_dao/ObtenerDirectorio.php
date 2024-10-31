@@ -37,7 +37,8 @@
             $coleccion = Conexion::obtenerColeccion('directorios'); // Obtiene la colección 'empleados'
 
             $directorios = $coleccion->find([
-                'carpeta_padre' => new MongoDB\BSON\ObjectId($idDirectorioPadre)
+                'carpeta_padre' => new MongoDB\BSON\ObjectId($idDirectorioPadre),
+                'estado' => 'activo'
             ]);
             return $directorios; // Retorna el usuario
         }
@@ -68,7 +69,8 @@
             $coleccion = Conexion::obtenerColeccion('directorios'); // Obtiene la colección 'empleados'
 
             $directorios = $coleccion->find([
-                'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuarioPropietario)
+                'usuario_propietario' => new MongoDB\BSON\ObjectId($idUsuarioPropietario),
+                'estado' => 'activo'
             ]);
             return $directorios; // Retorna el usuario
         }
